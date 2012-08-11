@@ -21,6 +21,13 @@ var SAILDASH = function() {
       radius: 3,
       color: "#FFF"
     },
+    tideSpinnerOptions: {
+      lines: 9,
+      length: 10,
+      width: 4,
+      radius: 7,
+      color: "#364CA3"
+    },
     sliderOptions: {
       disabled: true,
       steps: steps,
@@ -34,17 +41,27 @@ var SAILDASH = function() {
     this.forecastData = forecastData;
   };
 
+  saildash.setTideData = function(tideData) {
+    this.tideData = tideData;
+  };
+
   return saildash;
 }();
 
 $("document").ready(function() {
   SAILDASH.dateSlider = new Dragdealer("dateslider", SAILDASH.consts.sliderOptions);
   SAILDASH.sliderSpinner = new Spinner(SAILDASH.consts.spinnerOptions).spin($("#dateslider .handle .spincontainer")[0]);
+  SAILDASH.tideSpinner = new Spinner(SAILDASH.consts.tideSpinnerOptions).spin($("#tidespinner")[0]);
 
   $.getJSON("/data/weatherforecast", function(forecast) {
     SAILDASH.sliderSpinner.stop();
     SAILDASH.dateSlider.enable();
     SAILDASH.setForecastData(forecast);
     SAILDASH.dateChange(0);
+    $.getJSON("/data/tideforecast", function(tideForecast) {
+      SAILDASH.tideSpinner.stop();
+      $("#tidespinner").hide();
+      SAILDASH.setTideData(tideForecast);
+    });
   });
 });
