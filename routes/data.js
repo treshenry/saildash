@@ -1,6 +1,5 @@
 var http = require("http"),
-    xml2js = require("xml2js"),
-    jsdom = require("jsdom");
+    xml2js = require("xml2js");
 
 // Everything in here responds with JSON
 exports.data = function(req, res) {
