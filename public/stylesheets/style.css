@@ -30,12 +30,6 @@ a {
   font-style: italic;
 }
 
-#dateslider {
-  border-top: 1px solid #364CA3;
-  border-right: 1px solid #364CA3;
-  border-left: 1px solid #364CA3;
-}
-
 .grapharea {
   float: left;
   width: 270px;
@@ -48,14 +42,15 @@ a {
 
 .graphlabel {
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
   font-size: 9pt;
-  background-color: #364CA3;
-  color: #FFF;
+  color: #364CA3;
+  background-color: #FFF;
   text-align: center;
   padding: 5px;
+  z-index: 2;
 }
 
 #windspeed {
@@ -69,10 +64,10 @@ a {
   overflow: hidden;
 }
 
-#tidespinner {
+.graphspinner {
   width: 50px;
   height: 50px;
-  margin: 87px auto;
+  margin: 110px auto;
 }
 
 #footer {

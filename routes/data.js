@@ -49,10 +49,14 @@ exports.data = function(req, res) {
     if(month.length == 1) {
       month = "0" + month;
     }
+    var date = "" + today.getDate();
+    if(date.length == 1) {
+      date = "0" + date;
+    }
     var options = {
       host: 'tidesandcurrents.noaa.gov',
       port: 80,
-      path: 'http://tidesandcurrents.noaa.gov/noaatidepredictions/viewDailyPredictions.jsp?bmon=' + month + '&bday=' + today.getDate() + '&byear=' + today.getFullYear() + '&timelength=weekly&timeZone=2&dataUnits=1&datum=MLLW&timeUnits=2&interval=60&Threshold=greaterthanequal&thresholdvalue=&format=Submit&Stationid=9447130'
+      path: 'http://tidesandcurrents.noaa.gov/noaatidepredictions/viewDailyPredictions.jsp?bmon=' + month + '&bday=' + date + '&byear=' + today.getFullYear() + '&timelength=weekly&timeZone=2&dataUnits=1&datum=MLLW&timeUnits=2&interval=60&Threshold=greaterthanequal&thresholdvalue=&format=Submit&Stationid=9447130'
     };
 
     var externalReq = http.get(options, function(externalRes) {

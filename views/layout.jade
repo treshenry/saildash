@@ -4,11 +4,15 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/dragdealer.css')
-    script(src='/javascripts/d3.v2.min.js')
     script(src='/javascripts/zepto.min.js')
     script(src='/javascripts/dragdealer.min.js')
     script(src='/javascripts/spin.min.js')
     script(src='/javascripts/saildash.js')
   body
     div#content
+      div#headline Quick Wind & Tide Prediction
+      div#subheading Shilshole (Lat: 47.6825976 &mdash; Lon: -122.4070743)
       block content
+      div#footer Data Provided By&nbsp;
+                 a(href="http://www.noaa.gov/") NOAA
+                 |&nbsp;&ndash; Always check for small craft advisory before sailing! &ndash; &copy;Tres Henry 2012

@@ -10,7 +10,6 @@
 .dragdealer {
   position: relative;
   height: 30px;
-  background: #EEE;
 }
 
 .dragdealer .handle {
@@ -21,10 +20,13 @@
 .dragdealer .red-bar {
   width: 100px;
   height: 30px;
-  background: #364CA3;
-  color: #FFF;
+  background: rgba(54, 76, 163, 0.14);
+  color: #364CA3;
   line-height: 30px;
   text-align: center;
+  border-left: 1px solid #364CA3;
+  border-right: 1px solid #364CA3;
+  border-top: 1px solid #364CA3;
 }
 
 .dragdealer .disabled {
