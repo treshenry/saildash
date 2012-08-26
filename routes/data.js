@@ -1,5 +1,6 @@
 var http = require("http"),
-    xml2js = require("xml2js");
+    xml2js = require("xml2js"),
+    time = require("time");
 
 // Everything in here responds with JSON
 exports.data = function(req, res) {
@@ -43,7 +44,8 @@ exports.data = function(req, res) {
 
     // Get the data from NOAA as XML
     // TODO (ohnoimdead): Need to accept param for location
-    var today = new Date();
+    var today = new time.Date();
+    today.setTimezone("America/Los_Angeles");
     var month = "" + (today.getMonth() + 1);
     if(month.length == 1) {
       month = "0" + month;
