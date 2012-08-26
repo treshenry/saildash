@@ -146,7 +146,7 @@ var SAILDASH = function() {
           barEl.animate({"margin-bottom": "-" + height + "px", "background-color": "#F00"}, 200, "ease");
         }
       }
-      $("#tideHeightLabel").text("" + SAILDASH.tideData[index][0] + " ft " + SAILDASH.tideData[index][1]);
+      $("#tideHeightLabel").text("" + SAILDASH.tideData[index][0] + " ft");
     }
   };
 
