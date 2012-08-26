@@ -217,9 +217,9 @@ $("document").ready(function() {
     $("#helptext").hide();
     $(this).unbind("mousedown.saildash");
   });
-  $(".handle").bind("mousedown.saildash", function(evt) {
+  $(".handle").bind("mousedown.saildash touchstart.saildash", function(evt) {
     $("#helptext").hide();
-    $(this).unbind("mousedown.saildash");
+    $(this).unbind("mousedown.saildash touchstart.saildash");
   });
 
   $.getJSON("/data/weatherforecast", function(forecast) {
