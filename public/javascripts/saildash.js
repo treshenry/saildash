@@ -45,15 +45,6 @@ var SAILDASH = function() {
 
   saildash.setupDirectionGraph = function() {
     $("#winddir").append($("<div />").
-                         css("position", "absolute").
-                         css("top", "25px").
-                         css("width", "100%").
-                         css("color", "#364CA3").
-                         css("text-align", "center").
-                         css("font-family", "Times New Roman").
-                         css("font-size", "20pt").
-                         text("N"));
-    $("#winddir").append($("<div />").
                          attr("id", "dirArrow").
                          css("margin", "30px auto 0").
                          css("width", "230px").
@@ -113,7 +104,7 @@ var SAILDASH = function() {
 
   saildash.updateSpeedGraph = function(data) {
     var barHeight = Math.round((SAILDASH.consts.speedGraph.graphHeight / SAILDASH.consts.speedGraph.maxMPH) * parseInt(data), 10);
-    $("#speedLabel").text(data + " MPH").animate({bottom: barHeight + "px"}, 500, "ease");
+    $("#speedLabel").text(data + " kt").animate({bottom: barHeight + "px"}, 500, "ease");
     $("#speedBar").animate({height: barHeight + "px"}, 500, "ease");
   };
 
@@ -214,12 +205,22 @@ $("document").ready(function() {
                           attr("id", "helptext").
                           css("position", "absolute").
                           css("left", "105px").
-                          css("color", "#CCC").
+                          css("color", "#364CA3").
                           css("margin-top", "6px").
                           css("font-size", "12pt").
                           css("font-style", "italic").
-                          html("&larr; Drag Right"));
-  $(".handle").mousedown(function() { $("#helptext").hide(); });
+                          html("&larr; Drag Right").
+                          hide());
+
+  // Get rid of the help text on interaction
+  $("#dateslider").bind("mousedown.saildash", function(evt) {
+    $("#helptext").hide();
+    $(this).unbind("mousedown.saildash");
+  });
+  $(".handle").bind("mousedown.saildash", function(evt) {
+    $("#helptext").hide();
+    $(this).unbind("mousedown.saildash");
+  });
 
   $.getJSON("/data/weatherforecast", function(forecast) {
     SAILDASH.sliderSpinner.stop();
@@ -227,7 +228,6 @@ $("document").ready(function() {
     SAILDASH.directionSpinner.stop();
     $("#speedspinner").hide();
     $("#directionspinner").hide();
-    SAILDASH.dateSlider.enable();
     SAILDASH.setForecastData(forecast);
     SAILDASH.setupSpeedGraph();
     SAILDASH.setupDirectionGraph();
@@ -238,6 +238,9 @@ $("document").ready(function() {
       SAILDASH.setupTideGraph();
       SAILDASH.setTideData(tideForecast);
       SAILDASH.updateTideGraph();
+      SAILDASH.dateSlider.enable();
+      $("#helptext").show();
+      $(".handle").animate({color: "#FFF"}, 200, "ease");
     });
   });
 });

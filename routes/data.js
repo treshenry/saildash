@@ -24,7 +24,7 @@ exports.data = function(req, res) {
         body += chunk;
       });
 
-      // Whe complete return to the client as json
+      // When complete return to the client as json
       externalRes.on('end', function() {
         var parser = new xml2js.Parser();
         parser.parseString(body, function(err, result) {
