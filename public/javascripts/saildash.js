@@ -6,9 +6,9 @@ var SAILDASH = function() {
     var step = Math.round(x/(1/(steps-1)), 10);
     SAILDASH.selectedIndex = step;
     if(SAILDASH.forecastData) {
-      var date = new Date(SAILDASH.forecastData['data']['time-layout']['start-valid-time'][step]);
+      SAILDASH.startDate = new Date(SAILDASH.forecastData['data']['time-layout']['start-valid-time'][step]);
       // Update date on the slider
-      $('#dateslider .handle').text(date.getMonth() + 1 + "/" + date.getDate() + " " + date.getHours() + ":00");
+      $('#dateslider .handle').text(SAILDASH.startDate.getMonth() + 1 + "/" + SAILDASH.startDate.getDate() + " " + SAILDASH.startDate.getHours() + ":00");
 
       SAILDASH.updateSpeedGraph(SAILDASH.forecastData['data']['parameters']['wind-speed'][0]['value'][step]);
       SAILDASH.updateDirectionGraph(SAILDASH.forecastData['data']['parameters']['direction']['value'][step]);
@@ -146,7 +146,7 @@ var SAILDASH = function() {
           barEl.animate({"margin-bottom": "-" + height + "px", "background-color": "#F00"}, 200, "ease");
         }
       }
-      $("#tideHeightLabel").text("" + SAILDASH.tideData[index][0] + " ft");
+      $("#tideHeightLabel").text("" + SAILDASH.tideData[index][0] + " ft " + SAILDASH.tideData[index][1]);
     }
   };
 
@@ -157,12 +157,11 @@ var SAILDASH = function() {
   saildash.setTideData = function(tideData) {
     // Sanitize tide data
     var sanitizedData = [];
-    var today = new Date();
     var dataDate;
     SAILDASH.tideNowOffset = 0;
     $.each(tideData["tr"], function(index, item) {
-      dataDate = new Date(item["td"][0] + "/" + today.getFullYear() + " " + item["td"][2]);
-      if(dataDate < today) {
+      dataDate = new Date(item["td"][0] + "/" + SAILDASH.startDate.getFullYear() + " " + item["td"][2]);
+      if(dataDate < SAILDASH.startDate) {
         SAILDASH.tideNowOffset += 1;
       }
       sanitizedData.push([item["td"][3], dataDate]);
